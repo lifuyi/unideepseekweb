@@ -1,4 +1,5 @@
 import React from 'react';
+import { HashRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { 
   GraduationCap, 
   Globe, 
@@ -15,57 +16,66 @@ import {
   X
 } from 'lucide-react';
 import { motion } from 'motion/react';
+import BlogPage from './pages/BlogPage';
+import PostPage from './pages/PostPage';
 
-export default function App() {
+function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const location = useLocation();
+  const isBlogPage = location.pathname.startsWith('/blog');
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
-      {/* Navbar */}
-      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16 items-center">
-            <div className="flex items-center gap-2">
-              <div className="bg-red-600 p-2 rounded-lg">
-                <GraduationCap className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-xl font-bold tracking-tight text-slate-900">Unideepseek China</span>
+    <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16 items-center">
+          <Link to="/" className="flex items-center gap-2">
+            <div className="bg-red-600 p-2 rounded-lg">
+              <GraduationCap className="w-6 h-6 text-white" />
             </div>
-            
-            {/* Desktop Nav */}
-            <div className="hidden md:flex items-center gap-8">
-              <a href="#" className="text-sm font-medium text-slate-600 hover:text-red-600 transition-colors">Universities</a>
-              <a href="#" className="text-sm font-medium text-slate-600 hover:text-red-600 transition-colors">Programs</a>
-              <a href="#" className="text-sm font-medium text-slate-600 hover:text-red-600 transition-colors">Scholarships</a>
-              <a href="#blog" className="text-sm font-medium text-slate-600 hover:text-red-600 transition-colors">Blog</a>
-              <button className="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-red-700 transition-colors">
-                Apply Now
-              </button>
-            </div>
-
-            {/* Mobile menu button */}
-            <div className="md:hidden flex items-center">
-              <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-slate-600">
-                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </button>
-            </div>
-          </div>
-        </div>
-        
-        {/* Mobile Nav */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-white border-b border-slate-200 px-4 py-4 space-y-4 shadow-lg">
-            <a href="#" className="block text-base font-medium text-slate-600">Universities</a>
-            <a href="#" className="block text-base font-medium text-slate-600">Programs</a>
-            <a href="#" className="block text-base font-medium text-slate-600">Scholarships</a>
-            <a href="#blog" className="block text-base font-medium text-slate-600">Blog</a>
-            <button className="w-full bg-red-600 text-white px-4 py-2 rounded-full text-sm font-medium">
+            <span className="text-xl font-bold tracking-tight text-slate-900">Unideepseek China</span>
+          </Link>
+          
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-8">
+            <Link to="/" className="text-sm font-medium text-slate-600 hover:text-red-600 transition-colors">Home</Link>
+            <Link to="/#universities" className="text-sm font-medium text-slate-600 hover:text-red-600 transition-colors">Universities</Link>
+            <Link to="/#programs" className="text-sm font-medium text-slate-600 hover:text-red-600 transition-colors">Programs</Link>
+            <Link to="/#scholarships" className="text-sm font-medium text-slate-600 hover:text-red-600 transition-colors">Scholarships</Link>
+            <Link to="/blog" className={`text-sm font-medium transition-colors ${isBlogPage ? 'text-red-600' : 'text-slate-600 hover:text-red-600'}`}>Blog</Link>
+            <button className="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-red-700 transition-colors">
               Apply Now
             </button>
           </div>
-        )}
-      </nav>
 
+          {/* Mobile menu button */}
+          <div className="md:hidden flex items-center">
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-slate-600">
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      {/* Mobile Nav */}
+      {isMenuOpen && (
+        <div className="md:hidden bg-white border-b border-slate-200 px-4 py-4 space-y-4 shadow-lg">
+          <Link to="/" className="block text-base font-medium text-slate-600" onClick={() => setIsMenuOpen(false)}>Home</Link>
+          <Link to="/#universities" className="block text-base font-medium text-slate-600" onClick={() => setIsMenuOpen(false)}>Universities</Link>
+          <Link to="/#programs" className="block text-base font-medium text-slate-600" onClick={() => setIsMenuOpen(false)}>Programs</Link>
+          <Link to="/#scholarships" className="block text-base font-medium text-slate-600" onClick={() => setIsMenuOpen(false)}>Scholarships</Link>
+          <Link to="/blog" className="block text-base font-medium text-slate-600" onClick={() => setIsMenuOpen(false)}>Blog</Link>
+          <button className="w-full bg-red-600 text-white px-4 py-2 rounded-full text-sm font-medium">
+            Apply Now
+          </button>
+        </div>
+      )}
+    </nav>
+  );
+}
+
+function HomePage() {
+  return (
+    <>
       {/* Hero Section */}
       <section className="relative pt-20 pb-32 overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -159,7 +169,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Blog / News Section */}
+      {/* Blog Preview Section */}
       <section id="blog" className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-end mb-12">
@@ -167,9 +177,9 @@ export default function App() {
               <h2 className="text-3xl font-bold text-slate-900 mb-4">Latest News & Guides</h2>
               <p className="text-slate-600">Stay updated with the latest information about studying and living in China.</p>
             </div>
-            <a href="#" className="hidden md:flex items-center gap-2 text-red-600 font-medium hover:text-red-700">
+            <Link to="/blog" className="hidden md:flex items-center gap-2 text-red-600 font-medium hover:text-red-700">
               View all articles <ArrowRight className="w-4 h-4" />
-            </a>
+            </Link>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -226,92 +236,112 @@ export default function App() {
                   <p className="text-slate-600 mb-4 line-clamp-2">
                     {post.desc}
                   </p>
-                  <a href="#" className="inline-flex items-center gap-2 text-sm font-medium text-red-600 hover:text-red-700">
+                  <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-medium text-red-600 hover:text-red-700">
                     Read more <ArrowRight className="w-4 h-4" />
-                  </a>
+                  </Link>
                 </div>
               </motion.article>
             ))}
           </div>
           
           <div className="mt-8 text-center md:hidden">
-            <a href="#" className="inline-flex items-center gap-2 text-red-600 font-medium hover:text-red-700">
+            <Link to="/blog" className="inline-flex items-center gap-2 text-red-600 font-medium hover:text-red-700">
               View all articles <ArrowRight className="w-4 h-4" />
-            </a>
+            </Link>
           </div>
         </div>
       </section>
+    </>
+  );
+}
 
-      {/* Footer */}
-      <footer className="bg-slate-900 text-slate-300 py-16 border-t border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
-            <div className="col-span-1 md:col-span-1">
-              <div className="flex items-center gap-2 mb-6">
-                <div className="bg-red-600 p-1.5 rounded-lg">
-                  <GraduationCap className="w-5 h-5 text-white" />
-                </div>
-                <span className="text-xl font-bold tracking-tight text-white">Unideepseek</span>
+function Footer() {
+  return (
+    <footer className="bg-slate-900 text-slate-300 py-16 border-t border-slate-800">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid md:grid-cols-4 gap-12 mb-12">
+          <div className="col-span-1 md:col-span-1">
+            <div className="flex items-center gap-2 mb-6">
+              <div className="bg-red-600 p-1.5 rounded-lg">
+                <GraduationCap className="w-5 h-5 text-white" />
               </div>
-              <p className="text-sm text-slate-400 mb-6">
-                Your trusted partner for studying in China. We help international students find the right university, apply for scholarships, and prepare for their journey.
-              </p>
-              {/* Social Media Icons Placeholder */}
-              <div className="flex gap-4">
-                <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-red-600 hover:text-white transition-colors" aria-label="YouTube">
-                  <Youtube className="w-5 h-5" />
-                </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-pink-600 hover:text-white transition-colors" aria-label="Instagram">
-                  <Instagram className="w-5 h-5" />
-                </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-black hover:text-white transition-colors" aria-label="TikTok">
-                  <Video className="w-5 h-5" />
-                </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-green-500 hover:text-white transition-colors" aria-label="WhatsApp">
-                  <MessageCircle className="w-5 h-5" />
-                </a>
-              </div>
+              <span className="text-xl font-bold tracking-tight text-white">Unideepseek</span>
             </div>
-            
-            <div>
-              <h4 className="text-white font-semibold mb-6">Quick Links</h4>
-              <ul className="space-y-3 text-sm">
-                <li><a href="#" className="hover:text-white transition-colors">Find a University</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Scholarships</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Application Process</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Student Visa Guide</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="text-white font-semibold mb-6">Resources</h4>
-              <ul className="space-y-3 text-sm">
-                <li><a href="#blog" className="hover:text-white transition-colors">Blog & News</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Cost of Living Calculator</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Learn Basic Mandarin</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">FAQ</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="text-white font-semibold mb-6">Contact Us</h4>
-              <ul className="space-y-3 text-sm">
-                <li>Email: info@unideepseek.cn</li>
-                <li>Phone: +86 10 1234 5678</li>
-                <li>Address: Chaoyang District, Beijing, China</li>
-              </ul>
+            <p className="text-sm text-slate-400 mb-6">
+              Your trusted partner for studying in China. We help international students find the right university, apply for scholarships, and prepare for their journey.
+            </p>
+            <div className="flex gap-4">
+              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-red-600 hover:text-white transition-colors" aria-label="YouTube">
+                <Youtube className="w-5 h-5" />
+              </a>
+              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-pink-600 hover:text-white transition-colors" aria-label="Instagram">
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-black hover:text-white transition-colors" aria-label="TikTok">
+                <Video className="w-5 h-5" />
+              </a>
+              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-green-500 hover:text-white transition-colors" aria-label="WhatsApp">
+                <MessageCircle className="w-5 h-5" />
+              </a>
             </div>
           </div>
           
-          <div className="pt-8 border-t border-slate-800 text-sm text-slate-500 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p>&copy; {new Date().getFullYear()} Unideepseek China. All rights reserved.</p>
-            <div className="flex gap-6">
-              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-            </div>
+          <div>
+            <h4 className="text-white font-semibold mb-6">Quick Links</h4>
+            <ul className="space-y-3 text-sm">
+              <li><Link to="/#universities" className="hover:text-white transition-colors">Find a University</Link></li>
+              <li><Link to="/#scholarships" className="hover:text-white transition-colors">Scholarships</Link></li>
+              <li><Link to="/#programs" className="hover:text-white transition-colors">Application Process</Link></li>
+              <li><Link to="/blog" className="hover:text-white transition-colors">Blog & News</Link></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 className="text-white font-semibold mb-6">Resources</h4>
+            <ul className="space-y-3 text-sm">
+              <li><Link to="/blog" className="hover:text-white transition-colors">Blog & News</Link></li>
+              <li><a href="#" className="hover:text-white transition-colors">Cost of Living Calculator</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Learn Basic Mandarin</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">FAQ</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 className="text-white font-semibold mb-6">Contact Us</h4>
+            <ul className="space-y-3 text-sm">
+              <li>Email: info@unideepseek.cn</li>
+              <li>Phone: +86 10 1234 5678</li>
+              <li>Address: Chaoyang District, Beijing, China</li>
+            </ul>
           </div>
         </div>
-      </footer>
-    </div>
+        
+        <div className="pt-8 border-t border-slate-800 text-sm text-slate-500 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p>&copy; {new Date().getFullYear()} Unideepseek China. All rights reserved.</p>
+          <div className="flex gap-6">
+            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+export default function App() {
+  return (
+    <HashRouter>
+      <div className="min-h-screen bg-slate-50 font-sans text-slate-900 flex flex-col">
+        <Navbar />
+        <main className="flex-1">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:slug" element={<PostPage />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </HashRouter>
   );
 }

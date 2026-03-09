@@ -162,178 +162,6 @@ function HomePage() {
         </div>
       </section>
 
-      <section id="services" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">Our Services</h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">Comprehensive support for your journey to study in China, from application to arrival.</p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: <Target className="w-8 h-8 text-red-600" />,
-                title: "University Application",
-                desc: "Personalized guidance for applying to top Chinese universities. We help you choose the right program and maximize your chances of acceptance.",
-                price: "From $199",
-                features: ["University Selection", "Application Review", "Interview Prep", "Document Translation"]
-              },
-              {
-                icon: <Award className="w-8 h-8 text-red-600" />,
-                title: "Scholarship Strategy",
-                desc: "Maximize your chances of securing full funding including CSC, provincial, and university scholarships.",
-                price: "From $149",
-                features: ["Scholarship Matching", "Essay Review", "Interview Coaching", "Funding Negotiation"]
-              },
-              {
-                icon: <CheckCircle className="w-8 h-8 text-red-600" />,
-                title: "Visa & Pre-Departure",
-                desc: "Complete support for visa application and preparation for your new life in China.",
-                price: "From $99",
-                features: ["Visa Documentation", "Travel Planning", "Housing Setup", "Airport Pickup"]
-              }
-            ].map((service, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-lg transition-shadow"
-              >
-                <div className="bg-white w-16 h-16 rounded-xl flex items-center justify-center shadow-sm mb-6">
-                  {service.icon}
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">{service.title}</h3>
-                <p className="text-slate-600 leading-relaxed mb-6">{service.desc}</p>
-                <ul className="space-y-2 mb-6">
-                  {service.features.map((feature, j) => (
-                    <li key={j} className="flex items-center gap-2 text-sm text-slate-600">
-                      <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <div className="flex items-center justify-between pt-4 border-t border-slate-200">
-                  <span className="text-lg font-bold text-red-600">{service.price}</span>
-                  <button className="text-sm font-medium text-slate-900 hover:text-red-600 flex items-center gap-1">
-                    Learn more <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Trusted By Section */}
-      <section className="py-16 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-2">Trusted By Students From</h2>
-            <p className="text-slate-600">Partner universities and organizations worldwide</p>
-          </div>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60">
-            {[
-              { name: "Tsinghua University", color: "bg-red-600" },
-              { name: "Peking University", color: "bg-blue-600" },
-              { name: "Fudan University", color: "bg-red-500" },
-              { name: "Zhejiang University", color: "bg-green-600" },
-              { name: "Shanghai Jiao Tong", color: "bg-blue-800" },
-            ].map((uni, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <div className={`w-12 h-12 ${uni.color} rounded-lg flex items-center justify-center text-white font-bold text-sm`}>
-                  {uni.name.split(' ').map(w => w[0]).join('')}
-                </div>
-                <span className="text-slate-700 font-medium">{uni.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section id="faq" className="py-24 bg-white">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">Frequently Asked Questions</h2>
-            <p className="text-slate-600">Everything you need to know about studying in China</p>
-          </div>
-          
-          <div className="space-y-4">
-            {[
-              {
-                q: "How do I apply for a Chinese student visa (X1/X2)?",
-                a: "After receiving your university admission notice and JW202 form, you can apply for a student visa at the Chinese embassy/consulate in your country. We'll guide you through the entire process."
-              },
-              {
-                q: "What scholarships are available for international students?",
-                a: "The main scholarships are: Chinese Government Scholarship (CSC), Provincial Scholarships, and University Scholarships. We help you find and apply for the best options based on your profile."
-              },
-              {
-                q: "How much does it cost to study in China?",
-                a: "Tuition ranges from $2,000-$10,000/year depending on the university and program. Living costs are around $300-600/month. Many scholarships cover tuition and provide monthly stipends."
-              },
-              {
-                q: "Do I need to know Mandarin to study in China?",
-                a: "Many programs are offered in English, especially for graduate studies. For Chinese-taught programs, you'll need HSK 4-5 level. We also offer Mandarin prep courses."
-              },
-              {
-                q: "How long does the application process take?",
-                a: "Typically 3-6 months from start to enrollment. Early preparation is key. We recommend starting at least 6 months before your intended入学 date."
-              }
-            ].map((faq, i) => (
-              <FAQItem key={i} question={faq.q} answer={faq.a} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Study in China */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">Why Study in China?</h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">Experience a unique blend of ancient history and cutting-edge technology while receiving a world-class education.</p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: <BookOpen className="w-8 h-8 text-red-600" />,
-                title: "World-Class Education",
-                desc: "Join universities consistently ranked among the top globally, offering state-of-the-art facilities and renowned faculty."
-              },
-              {
-                icon: <Globe className="w-8 h-8 text-red-600" />,
-                title: "Cultural Immersion",
-                desc: "Learn Mandarin and immerse yourself in a rich, 5,000-year-old culture while living in modern, vibrant cities."
-              },
-              {
-                icon: <MapPin className="w-8 h-8 text-red-600" />,
-                title: "Career Opportunities",
-                desc: "Build a global network and tap into the immense career opportunities in the world's second-largest economy."
-              }
-            ].map((feature, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-lg transition-shadow"
-              >
-                <div className="bg-white w-16 h-16 rounded-xl flex items-center justify-center shadow-sm mb-6">
-                  {feature.icon}
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">{feature.title}</h3>
-                <p className="text-slate-600 leading-relaxed">{feature.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Blog Preview Section */}
       <section id="blog" className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -413,6 +241,176 @@ function HomePage() {
             <Link to="/blog" className="inline-flex items-center gap-2 text-red-600 font-medium hover:text-red-700">
               View all articles <ArrowRight className="w-4 h-4" />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Study in China */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">Why Study in China?</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">Experience a unique blend of ancient history and cutting-edge technology while receiving a world-class education.</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: <BookOpen className="w-8 h-8 text-red-600" />,
+                title: "World-Class Education",
+                desc: "Join universities consistently ranked among the top globally, offering state-of-the-art facilities and renowned faculty."
+              },
+              {
+                icon: <Globe className="w-8 h-8 text-red-600" />,
+                title: "Cultural Immersion",
+                desc: "Learn Mandarin and immerse yourself in a rich, 5,000-year-old culture while living in modern, vibrant cities."
+              },
+              {
+                icon: <MapPin className="w-8 h-8 text-red-600" />,
+                title: "Career Opportunities",
+                desc: "Build a global network and tap into the immense career opportunities in the world's second-largest economy."
+              }
+            ].map((feature, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-lg transition-shadow"
+              >
+                <div className="bg-white w-16 h-16 rounded-xl flex items-center justify-center shadow-sm mb-6">
+                  {feature.icon}
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">{feature.title}</h3>
+                <p className="text-slate-600 leading-relaxed">{feature.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="services" className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">Our Services</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">Comprehensive support for your journey to study in China, from application to arrival.</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: <Target className="w-8 h-8 text-red-600" />,
+                title: "University Application",
+                desc: "Personalized guidance for applying to top Chinese universities. We help you choose the right program and maximize your chances of acceptance.",
+                price: "From $199",
+                features: ["University Selection", "Application Review", "Interview Prep", "Document Translation"]
+              },
+              {
+                icon: <Award className="w-8 h-8 text-red-600" />,
+                title: "Scholarship Strategy",
+                desc: "Maximize your chances of securing full funding including CSC, provincial, and university scholarships.",
+                price: "From $149",
+                features: ["Scholarship Matching", "Essay Review", "Interview Coaching", "Funding Negotiation"]
+              },
+              {
+                icon: <CheckCircle className="w-8 h-8 text-red-600" />,
+                title: "Visa & Pre-Departure",
+                desc: "Complete support for visa application and preparation for your new life in China.",
+                price: "From $99",
+                features: ["Visa Documentation", "Travel Planning", "Housing Setup", "Airport Pickup"]
+              }
+            ].map((service, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-lg transition-shadow"
+              >
+                <div className="bg-white w-16 h-16 rounded-xl flex items-center justify-center shadow-sm mb-6">
+                  {service.icon}
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">{service.title}</h3>
+                <p className="text-slate-600 leading-relaxed mb-6">{service.desc}</p>
+                <ul className="space-y-2 mb-6">
+                  {service.features.map((feature, j) => (
+                    <li key={j} className="flex items-center gap-2 text-sm text-slate-600">
+                      <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex items-center justify-between pt-4 border-t border-slate-200">
+                  <span className="text-lg font-bold text-red-600">{service.price}</span>
+                  <button className="text-sm font-medium text-slate-900 hover:text-red-600 flex items-center gap-1">
+                    Learn more <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl font-bold text-slate-900 mb-2">Trusted By Students From</h2>
+            <p className="text-slate-600">Partner universities and organizations worldwide</p>
+          </div>
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60">
+            {[
+              { name: "Tsinghua University", color: "bg-red-600" },
+              { name: "Peking University", color: "bg-blue-600" },
+              { name: "Fudan University", color: "bg-red-500" },
+              { name: "Zhejiang University", color: "bg-green-600" },
+              { name: "Shanghai Jiao Tong", color: "bg-blue-800" },
+            ].map((uni, i) => (
+              <div key={i} className="flex items-center gap-3">
+                <div className={`w-12 h-12 ${uni.color} rounded-lg flex items-center justify-center text-white font-bold text-sm`}>
+                  {uni.name.split(' ').map(w => w[0]).join('')}
+                </div>
+                <span className="text-slate-700 font-medium">{uni.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" className="py-24 bg-white">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">Frequently Asked Questions</h2>
+            <p className="text-slate-600">Everything you need to know about studying in China</p>
+          </div>
+          
+          <div className="space-y-4">
+            {[
+              {
+                q: "How do I apply for a Chinese student visa (X1/X2)?",
+                a: "After receiving your university admission notice and JW202 form, you can apply for a student visa at the Chinese embassy/consulate in your country. We'll guide you through the entire process."
+              },
+              {
+                q: "What scholarships are available for international students?",
+                a: "The main scholarships are: Chinese Government Scholarship (CSC), Provincial Scholarships, and University Scholarships. We help you find and apply for the best options based on your profile."
+              },
+              {
+                q: "How much does it cost to study in China?",
+                a: "Tuition ranges from $2,000-$10,000/year depending on the university and program. Living costs are around $300-600/month. Many scholarships cover tuition and provide monthly stipends."
+              },
+              {
+                q: "Do I need to know Mandarin to study in China?",
+                a: "Many programs are offered in English, especially for graduate studies. For Chinese-taught programs, you'll need HSK 4-5 level. We also offer Mandarin prep courses."
+              },
+              {
+                q: "How long does the application process take?",
+                a: "Typically 3-6 months from start to enrollment. Early preparation is key. We recommend starting at least 6 months before your intended入学 date."
+              }
+            ].map((faq, i) => (
+              <FAQItem key={i} question={faq.q} answer={faq.a} />
+            ))}
           </div>
         </div>
       </section>

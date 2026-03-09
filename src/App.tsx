@@ -1,5 +1,8 @@
 import React from 'react';
 import { HashRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { motion } from 'motion/react';
+import BlogPage from './pages/BlogPage';
+import PostPage from './pages/PostPage';
 import { 
   GraduationCap, 
   Globe, 

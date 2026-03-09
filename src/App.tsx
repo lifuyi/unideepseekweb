@@ -162,34 +162,6 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="py-12 bg-gradient-to-r from-red-600 to-red-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { icon: <Users className="w-8 h-8" />, value: "2,500+", label: "Students Placed" },
-              { icon: <Globe className="w-8 h-8" />, value: "50+", label: "Partner Universities" },
-              { icon: <Award className="w-8 h-8" />, value: "95%", label: "Success Rate" },
-              { icon: <TrendingUp className="w-8 h-8" />, value: "$2M+", label: "Scholarships Secured" },
-            ].map((stat, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="text-center"
-              >
-                <div className="flex justify-center mb-3 text-white/90">
-                  {stat.icon}
-                </div>
-                <div className="text-3xl md:text-4xl font-bold text-white mb-1">{stat.value}</div>
-                <div className="text-red-100 text-sm font-medium">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section id="services" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -312,79 +284,6 @@ function HomePage() {
               }
             ].map((faq, i) => (
               <FAQItem key={i} question={faq.q} answer={faq.a} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Community Section */}
-      <section className="py-24 bg-gradient-to-br from-slate-900 to-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-white mb-4">Join Our Community</h2>
-            <p className="text-slate-300 max-w-2xl mx-auto">Connect with thousands of students, get expert advice, and stay updated on scholarships and admissions.</p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { icon: MessageSquare, name: "WeChat Group", desc: "8,000+ members. Get instant answers and connect with current students.", color: "bg-green-500", action: "Join WeChat" },
-              { icon: Video, name: "YouTube Channel", desc: "Exam guides, university tours, and student interviews.", color: "bg-red-600", action: "Subscribe" },
-              { icon: Instagram, name: "Instagram", desc: "Daily updates, student stories, and life in China.", color: "bg-pink-600", action: "Follow" }
-            ].map((platform, i) => (
-              <motion.a 
-                key={i}
-                href="#"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="flex flex-col items-center p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors text-center"
-              >
-                <div className={`w-16 h-16 ${platform.color} rounded-full flex items-center justify-center mb-4`}>
-                  <platform.icon className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2">{platform.name}</h3>
-                <p className="text-slate-400 mb-4">{platform.desc}</p>
-                <span className="inline-flex items-center gap-2 text-white font-medium hover:underline">
-                  {platform.action} <ArrowRight className="w-4 h-4" />
-                </span>
-              </motion.a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Meet the Team Section */}
-      <section className="py-24 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">Meet Our Advisors</h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">Our team consists of former admissions officers, scholarship experts, and alumni from top Chinese universities.</p>
-          </div>
-          
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              { name: "Dr. Li Wei", role: "Founder & CEO", uni: "Tsinghua University", bio: "Former admissions committee member with 15+ years experience." },
-              { name: "Sarah Chen", role: "Scholarship Director", uni: "Harvard Alumni", bio: "Helped students secure over $5M in scholarships." },
-              { name: "Michael Zhang", role: "Application Coach", uni: "Fudan University", bio: "PhD graduate with expertise in STEM programs." },
-              { name: "Emma Liu", role: "Visa Specialist", uni: "Beijing Language University", bio: "99% visa success rate with 10+ years of experience." }
-            ].map((member, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="bg-white rounded-2xl p-6 text-center shadow-sm border border-slate-100"
-              >
-                <div className="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-red-500 to-orange-400 rounded-full flex items-center justify-center">
-                  <span className="text-3xl font-bold text-white">{member.name.split(' ').map(n => n[0]).join('')}</span>
-                </div>
-                <h3 className="text-lg font-bold text-slate-900 mb-1">{member.name}</h3>
-                <p className="text-red-600 font-medium text-sm mb-2">{member.role}</p>
-                <p className="text-slate-500 text-xs mb-3">{member.uni}</p>
-                <p className="text-slate-600 text-sm">{member.bio}</p>
-              </motion.div>
             ))}
           </div>
         </div>
@@ -514,6 +413,79 @@ function HomePage() {
             <Link to="/blog" className="inline-flex items-center gap-2 text-red-600 font-medium hover:text-red-700">
               View all articles <ArrowRight className="w-4 h-4" />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Meet the Team Section */}
+      <section className="py-24 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">Meet Our Advisors</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">Our team consists of former admissions officers, scholarship experts, and alumni from top Chinese universities.</p>
+          </div>
+          
+          <div className="grid md:grid-cols-4 gap-8">
+            {[
+              { name: "Dr. Li Wei", role: "Founder & CEO", uni: "Tsinghua University", bio: "Former admissions committee member with 15+ years experience." },
+              { name: "Sarah Chen", role: "Scholarship Director", uni: "Harvard Alumni", bio: "Helped students secure over $5M in scholarships." },
+              { name: "Michael Zhang", role: "Application Coach", uni: "Fudan University", bio: "PhD graduate with expertise in STEM programs." },
+              { name: "Emma Liu", role: "Visa Specialist", uni: "Beijing Language University", bio: "99% visa success rate with 10+ years of experience." }
+            ].map((member, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="bg-white rounded-2xl p-6 text-center shadow-sm border border-slate-100"
+              >
+                <div className="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-red-500 to-orange-400 rounded-full flex items-center justify-center">
+                  <span className="text-3xl font-bold text-white">{member.name.split(' ').map(n => n[0]).join('')}</span>
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 mb-1">{member.name}</h3>
+                <p className="text-red-600 font-medium text-sm mb-2">{member.role}</p>
+                <p className="text-slate-500 text-xs mb-3">{member.uni}</p>
+                <p className="text-slate-600 text-sm">{member.bio}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Community Section */}
+      <section className="py-24 bg-gradient-to-br from-slate-900 to-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-white mb-4">Join Our Community</h2>
+            <p className="text-slate-300 max-w-2xl mx-auto">Connect with thousands of students, get expert advice, and stay updated on scholarships and admissions.</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { icon: MessageSquare, name: "WeChat Group", desc: "8,000+ members. Get instant answers and connect with current students.", color: "bg-green-500", action: "Join WeChat" },
+              { icon: Video, name: "YouTube Channel", desc: "Exam guides, university tours, and student interviews.", color: "bg-red-600", action: "Subscribe" },
+              { icon: Instagram, name: "Instagram", desc: "Daily updates, student stories, and life in China.", color: "bg-pink-600", action: "Follow" }
+            ].map((platform, i) => (
+              <motion.a 
+                key={i}
+                href="#"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="flex flex-col items-center p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors text-center"
+              >
+                <div className={`w-16 h-16 ${platform.color} rounded-full flex items-center justify-center mb-4`}>
+                  <platform.icon className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">{platform.name}</h3>
+                <p className="text-slate-400 mb-4">{platform.desc}</p>
+                <span className="inline-flex items-center gap-2 text-white font-medium hover:underline">
+                  {platform.action} <ArrowRight className="w-4 h-4" />
+                </span>
+              </motion.a>
+            ))}
           </div>
         </div>
       </section>

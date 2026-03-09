@@ -2,7 +2,7 @@
 title: "New Visa Regulations for International Students in 2026"
 date: "2026-03-05"
 category: "News"
-author: "Unideepseek Team"
+author: "Unideepmate Team"
 image: "https://picsum.photos/seed/university/800/600"
 description: "Everything you need to know about the latest updates to the X1 and X2 student visas."
 ---

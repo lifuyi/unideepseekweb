@@ -2,7 +2,7 @@
 title: "How to Apply for the Chinese Government Scholarship (CSC)"
 date: "2026-03-15"
 category: "Guide"
-author: "Unideepseek Team"
+author: "Unideepmate Team"
 image: "https://picsum.photos/seed/beijing/800/600"
 description: "A complete step-by-step guide to securing full funding for your studies in China."
 ---

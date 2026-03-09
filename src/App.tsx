@@ -70,7 +70,7 @@ function Navbar() {
             <div className="bg-red-600 p-2 rounded-lg">
               <GraduationCap className="w-6 h-6 text-white" />
             </div>
-            <span className="text-xl font-bold tracking-tight text-slate-900">Unideepseek China</span>
+            <span className="text-xl font-bold tracking-tight text-slate-900">Unideepmate China</span>
           </Link>
           
           {/* Desktop Nav */}
@@ -142,7 +142,7 @@ function HomePage() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-lg md:text-xl text-slate-600 mb-10"
             >
-              Unideepseek China is your ultimate guide to finding the perfect university, securing scholarships, and starting your educational journey in one of the world's fastest-growing economies.
+              Unideepmate China is your ultimate guide to finding the perfect university, securing scholarships, and starting your educational journey in one of the world's fastest-growing economies.
             </motion.p>
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -501,7 +501,7 @@ function Footer() {
               <div className="bg-red-600 p-1.5 rounded-lg">
                 <GraduationCap className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold tracking-tight text-white">Unideepseek</span>
+              <span className="text-xl font-bold tracking-tight text-white">Unideepmate</span>
             </div>
             <p className="text-sm text-slate-400 mb-6">
               Your trusted partner for studying in China. We help international students find the right university, apply for scholarships, and prepare for their journey.
@@ -553,7 +553,7 @@ function Footer() {
         </div>
         
         <div className="pt-8 border-t border-slate-800 text-sm text-slate-500 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p>&copy; {new Date().getFullYear()} Unideepseek China. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Unideepmate China. All rights reserved.</p>
           <div className="flex gap-6">
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-white transition-colors">Terms of Service</a>

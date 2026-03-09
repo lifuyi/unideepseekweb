@@ -13,11 +13,46 @@ import {
   Calendar,
   Search,
   Menu,
-  X
+  X,
+  Users,
+  Award,
+  CheckCircle,
+  HelpCircle,
+  ChevronDown,
+  ChevronUp,
+  Clock,
+  Target,
+  TrendingUp,
+  Star,
+  Send,
+  MessageSquare
 } from 'lucide-react';
 import { motion } from 'motion/react';
-import BlogPage from './pages/BlogPage';
-import PostPage from './pages/PostPage';
+
+function FAQItem({ question, answer }: { question: string; answer: string }) {
+  const [isOpen, setIsOpen] = React.useState(false);
+  
+  return (
+    <div className="border border-slate-200 rounded-xl overflow-hidden">
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between p-5 text-left bg-slate-50 hover:bg-slate-100 transition-colors"
+      >
+        <span className="font-medium text-slate-900">{question}</span>
+        {isOpen ? <ChevronUp className="w-5 h-5 text-slate-500 flex-shrink-0" /> : <ChevronDown className="w-5 h-5 text-slate-500 flex-shrink-0" />}
+      </button>
+      {isOpen && (
+        <motion.div 
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: 'auto', opacity: 1 }}
+          className="p-5 bg-white border-t border-slate-200"
+        >
+          <p className="text-slate-600">{answer}</p>
+        </motion.div>
+      )}
+    </div>
+  );
+}
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -38,9 +73,9 @@ function Navbar() {
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
             <Link to="/" className="text-sm font-medium text-slate-600 hover:text-red-600 transition-colors">Home</Link>
+            <Link to="/#services" className="text-sm font-medium text-slate-600 hover:text-red-600 transition-colors">Services</Link>
             <Link to="/#universities" className="text-sm font-medium text-slate-600 hover:text-red-600 transition-colors">Universities</Link>
-            <Link to="/#programs" className="text-sm font-medium text-slate-600 hover:text-red-600 transition-colors">Programs</Link>
-            <Link to="/#scholarships" className="text-sm font-medium text-slate-600 hover:text-red-600 transition-colors">Scholarships</Link>
+            <Link to="/#faq" className="text-sm font-medium text-slate-600 hover:text-red-600 transition-colors">FAQ</Link>
             <Link to="/blog" className={`text-sm font-medium transition-colors ${isBlogPage ? 'text-red-600' : 'text-slate-600 hover:text-red-600'}`}>Blog</Link>
             <button className="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-red-700 transition-colors">
               Apply Now
@@ -60,9 +95,9 @@ function Navbar() {
       {isMenuOpen && (
         <div className="md:hidden bg-white border-b border-slate-200 px-4 py-4 space-y-4 shadow-lg">
           <Link to="/" className="block text-base font-medium text-slate-600" onClick={() => setIsMenuOpen(false)}>Home</Link>
+          <Link to="/#services" className="block text-base font-medium text-slate-600" onClick={() => setIsMenuOpen(false)}>Services</Link>
           <Link to="/#universities" className="block text-base font-medium text-slate-600" onClick={() => setIsMenuOpen(false)}>Universities</Link>
-          <Link to="/#programs" className="block text-base font-medium text-slate-600" onClick={() => setIsMenuOpen(false)}>Programs</Link>
-          <Link to="/#scholarships" className="block text-base font-medium text-slate-600" onClick={() => setIsMenuOpen(false)}>Scholarships</Link>
+          <Link to="/#faq" className="block text-base font-medium text-slate-600" onClick={() => setIsMenuOpen(false)}>FAQ</Link>
           <Link to="/blog" className="block text-base font-medium text-slate-600" onClick={() => setIsMenuOpen(false)}>Blog</Link>
           <button className="w-full bg-red-600 text-white px-4 py-2 rounded-full text-sm font-medium">
             Apply Now
@@ -120,6 +155,234 @@ function HomePage() {
                 Free Consultation
               </button>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-12 bg-gradient-to-r from-red-600 to-red-700">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { icon: <Users className="w-8 h-8" />, value: "2,500+", label: "Students Placed" },
+              { icon: <Globe className="w-8 h-8" />, value: "50+", label: "Partner Universities" },
+              { icon: <Award className="w-8 h-8" />, value: "95%", label: "Success Rate" },
+              { icon: <TrendingUp className="w-8 h-8" />, value: "$2M+", label: "Scholarships Secured" },
+            ].map((stat, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="text-center"
+              >
+                <div className="flex justify-center mb-3 text-white/90">
+                  {stat.icon}
+                </div>
+                <div className="text-3xl md:text-4xl font-bold text-white mb-1">{stat.value}</div>
+                <div className="text-red-100 text-sm font-medium">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="services" className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">Our Services</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">Comprehensive support for your journey to study in China, from application to arrival.</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: <Target className="w-8 h-8 text-red-600" />,
+                title: "University Application",
+                desc: "Personalized guidance for applying to top Chinese universities. We help you choose the right program and maximize your chances of acceptance.",
+                price: "From $199",
+                features: ["University Selection", "Application Review", "Interview Prep", "Document Translation"]
+              },
+              {
+                icon: <Award className="w-8 h-8 text-red-600" />,
+                title: "Scholarship Strategy",
+                desc: "Maximize your chances of securing full funding including CSC, provincial, and university scholarships.",
+                price: "From $149",
+                features: ["Scholarship Matching", "Essay Review", "Interview Coaching", "Funding Negotiation"]
+              },
+              {
+                icon: <CheckCircle className="w-8 h-8 text-red-600" />,
+                title: "Visa & Pre-Departure",
+                desc: "Complete support for visa application and preparation for your new life in China.",
+                price: "From $99",
+                features: ["Visa Documentation", "Travel Planning", "Housing Setup", "Airport Pickup"]
+              }
+            ].map((service, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-lg transition-shadow"
+              >
+                <div className="bg-white w-16 h-16 rounded-xl flex items-center justify-center shadow-sm mb-6">
+                  {service.icon}
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">{service.title}</h3>
+                <p className="text-slate-600 leading-relaxed mb-6">{service.desc}</p>
+                <ul className="space-y-2 mb-6">
+                  {service.features.map((feature, j) => (
+                    <li key={j} className="flex items-center gap-2 text-sm text-slate-600">
+                      <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex items-center justify-between pt-4 border-t border-slate-200">
+                  <span className="text-lg font-bold text-red-600">{service.price}</span>
+                  <button className="text-sm font-medium text-slate-900 hover:text-red-600 flex items-center gap-1">
+                    Learn more <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Trusted By Section */}
+      <section className="py-16 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl font-bold text-slate-900 mb-2">Trusted By Students From</h2>
+            <p className="text-slate-600">Partner universities and organizations worldwide</p>
+          </div>
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60">
+            {[
+              { name: "Tsinghua University", color: "bg-red-600" },
+              { name: "Peking University", color: "bg-blue-600" },
+              { name: "Fudan University", color: "bg-red-500" },
+              { name: "Zhejiang University", color: "bg-green-600" },
+              { name: "Shanghai Jiao Tong", color: "bg-blue-800" },
+            ].map((uni, i) => (
+              <div key={i} className="flex items-center gap-3">
+                <div className={`w-12 h-12 ${uni.color} rounded-lg flex items-center justify-center text-white font-bold text-sm`}>
+                  {uni.name.split(' ').map(w => w[0]).join('')}
+                </div>
+                <span className="text-slate-700 font-medium">{uni.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section id="faq" className="py-24 bg-white">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">Frequently Asked Questions</h2>
+            <p className="text-slate-600">Everything you need to know about studying in China</p>
+          </div>
+          
+          <div className="space-y-4">
+            {[
+              {
+                q: "How do I apply for a Chinese student visa (X1/X2)?",
+                a: "After receiving your university admission notice and JW202 form, you can apply for a student visa at the Chinese embassy/consulate in your country. We'll guide you through the entire process."
+              },
+              {
+                q: "What scholarships are available for international students?",
+                a: "The main scholarships are: Chinese Government Scholarship (CSC), Provincial Scholarships, and University Scholarships. We help you find and apply for the best options based on your profile."
+              },
+              {
+                q: "How much does it cost to study in China?",
+                a: "Tuition ranges from $2,000-$10,000/year depending on the university and program. Living costs are around $300-600/month. Many scholarships cover tuition and provide monthly stipends."
+              },
+              {
+                q: "Do I need to know Mandarin to study in China?",
+                a: "Many programs are offered in English, especially for graduate studies. For Chinese-taught programs, you'll need HSK 4-5 level. We also offer Mandarin prep courses."
+              },
+              {
+                q: "How long does the application process take?",
+                a: "Typically 3-6 months from start to enrollment. Early preparation is key. We recommend starting at least 6 months before your intended入学 date."
+              }
+            ].map((faq, i) => (
+              <FAQItem key={i} question={faq.q} answer={faq.a} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Community Section */}
+      <section className="py-24 bg-gradient-to-br from-slate-900 to-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-white mb-4">Join Our Community</h2>
+            <p className="text-slate-300 max-w-2xl mx-auto">Connect with thousands of students, get expert advice, and stay updated on scholarships and admissions.</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { icon: MessageSquare, name: "WeChat Group", desc: "8,000+ members. Get instant answers and connect with current students.", color: "bg-green-500", action: "Join WeChat" },
+              { icon: Video, name: "YouTube Channel", desc: "Exam guides, university tours, and student interviews.", color: "bg-red-600", action: "Subscribe" },
+              { icon: Instagram, name: "Instagram", desc: "Daily updates, student stories, and life in China.", color: "bg-pink-600", action: "Follow" }
+            ].map((platform, i) => (
+              <motion.a 
+                key={i}
+                href="#"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="flex flex-col items-center p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors text-center"
+              >
+                <div className={`w-16 h-16 ${platform.color} rounded-full flex items-center justify-center mb-4`}>
+                  <platform.icon className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">{platform.name}</h3>
+                <p className="text-slate-400 mb-4">{platform.desc}</p>
+                <span className="inline-flex items-center gap-2 text-white font-medium hover:underline">
+                  {platform.action} <ArrowRight className="w-4 h-4" />
+                </span>
+              </motion.a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Meet the Team Section */}
+      <section className="py-24 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">Meet Our Advisors</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">Our team consists of former admissions officers, scholarship experts, and alumni from top Chinese universities.</p>
+          </div>
+          
+          <div className="grid md:grid-cols-4 gap-8">
+            {[
+              { name: "Dr. Li Wei", role: "Founder & CEO", uni: "Tsinghua University", bio: "Former admissions committee member with 15+ years experience." },
+              { name: "Sarah Chen", role: "Scholarship Director", uni: "Harvard Alumni", bio: "Helped students secure over $5M in scholarships." },
+              { name: "Michael Zhang", role: "Application Coach", uni: "Fudan University", bio: "PhD graduate with expertise in STEM programs." },
+              { name: "Emma Liu", role: "Visa Specialist", uni: "Beijing Language University", bio: "99% visa success rate with 10+ years of experience." }
+            ].map((member, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="bg-white rounded-2xl p-6 text-center shadow-sm border border-slate-100"
+              >
+                <div className="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-red-500 to-orange-400 rounded-full flex items-center justify-center">
+                  <span className="text-3xl font-bold text-white">{member.name.split(' ').map(n => n[0]).join('')}</span>
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 mb-1">{member.name}</h3>
+                <p className="text-red-600 font-medium text-sm mb-2">{member.role}</p>
+                <p className="text-slate-500 text-xs mb-3">{member.uni}</p>
+                <p className="text-slate-600 text-sm">{member.bio}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

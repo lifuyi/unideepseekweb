@@ -23,6 +23,8 @@ import {
   HelpCircle,
   ChevronDown,
   ChevronUp,
+  ChevronLeft,
+  ChevronRight,
   Clock,
   Target,
   TrendingUp,
@@ -110,39 +112,89 @@ function Navbar() {
 }
 
 function HomePage() {
+  const heroImages = [
+    "/09426451feb1414d99ae71e87f66daf8.webp",
+    "/46ed867159e749c1b9ca10bdc6331594.webp",
+    "/6cf96ccebaed4c8cab1d20f2a8834158.webp",
+    "/b72afc8b3ee72d96914735cb83429ce6.jpeg"
+  ];
+  const [currentSlide, setCurrentSlide] = React.useState(0);
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [heroImages.length]);
+
   return (
     <>
-      {/* Hero Section */}
+      {/* Hero Section - Carousel */}
       <section className="relative pt-20 pb-32 overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img 
-            src="https://picsum.photos/seed/shanghai/1920/1080?blur=2" 
-            alt="Shanghai Skyline" 
-            className="w-full h-full object-cover opacity-20"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-50/80 to-slate-50"></div>
+          {heroImages.map((img, index) => (
+            <motion.img
+              key={index}
+              src={img}
+              alt={`Slide ${index + 1}`}
+              className="absolute inset-0 w-full h-full object-cover"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: index === currentSlide ? 1 : 0 }}
+              transition={{ duration: 1 }}
+            />
+          ))}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 to-slate-900/50"></div>
         </div>
+        
+        {/* Carousel Indicators */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex gap-2">
+          {heroImages.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-3 h-3 rounded-full transition-all ${
+                index === currentSlide ? 'bg-white w-8' : 'bg-white/50 hover:bg-white/70'
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Carousel Arrows */}
+        <button
+          onClick={() => setCurrentSlide((prev) => (prev - 1 + heroImages.length) % heroImages.length)}
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center backdrop-blur-sm transition-colors"
+        >
+          <ChevronLeft className="w-6 h-6 text-white" />
+        </button>
+        <button
+          onClick={() => setCurrentSlide((prev) => (prev + 1) % heroImages.length)}
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center backdrop-blur-sm transition-colors"
+        >
+          <ChevronRight className="w-6 h-6 text-white" />
+        </button>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto">
             <motion.h1 
+              key={currentSlide}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6"
+              className="text-5xl md:text-6xl font-extrabold tracking-tight text-white mb-6"
             >
-              Unlock Your Future in <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-500">China</span>
+              Unlock Your Future in <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400">China</span>
             </motion.h1>
             <motion.p 
+              key={`p-${currentSlide}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-lg md:text-xl text-slate-600 mb-10"
+              className="text-lg md:text-xl text-white/90 mb-10"
             >
               UniSeek China is your ultimate guide to finding the perfect university, securing scholarships, and starting your educational journey in one of the world's fastest-growing economies.
             </motion.p>
             <motion.div 
+              key={`buttons-${currentSlide}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}

@@ -2,7 +2,7 @@
 title: "Top 10 Apps You Must Have When Living in China"
 date: "2026-03-10"
 category: "Student Life"
-author: "Unideepmate Team"
+author: "UniSeek Team"
 image: "https://picsum.photos/seed/student/800/600"
 description: "From WeChat to Alipay, discover the essential apps that will make your life in China easier."
 ---
